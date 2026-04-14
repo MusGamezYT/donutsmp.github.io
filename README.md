@@ -19,6 +19,8 @@ This project is configured to be hosted on GitHub Pages.
 2. Run `npm run build`.
 3. Upload the contents of the `dist/` folder to your hosting provider or the `gh-pages` branch.
 
-## Configuration
+### Troubleshooting Deployment
 
-The project uses relative paths (`base: './'` in `vite.config.ts`), which ensures it works correctly even if hosted at a sub-path like `https://<username>.github.io/<repo-name>/`.
+If you encounter an error regarding a missing "lock file" (like `package-lock.json`) in GitHub Actions:
+- I have updated the workflow to disable automatic caching, which allows the build to succeed without a lockfile.
+- **Recommended**: For faster builds, run `npm install` in your local environment, which will generate a `package-lock.json`. Commit this file to your repository. You can then re-enable caching in `.github/workflows/deploy.yml` by adding `cache: 'npm'` back to the `setup-node` step.
